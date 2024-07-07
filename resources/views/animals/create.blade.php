@@ -15,13 +15,13 @@
         </div>
         <div class="form-group">
             <label for="years">Years</label>
-            <input type="number" class="form-control" id="years" name="years">
+            <input type="number" class="form-control" id="years" name="years" required>
         </div>
         <div class="form-group">
             <label for="farm_id">Farm</label>
             <select class="form-control" id="farm_id" name="farm_id" required>
                 @foreach($farms as $farm)
-                <option value="{{ $farm->id }}">{{ $farm->name }}</option>
+                    <option value="{{ $farm->id }}">{{ $farm->name }}</option>
                 @endforeach
             </select>
         </div>

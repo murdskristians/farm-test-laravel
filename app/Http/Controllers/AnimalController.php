@@ -16,20 +16,24 @@ class AnimalController extends Controller
 
     public function create()
     {
-        $farms = Farm::all();
+        $farms = Farm::where('user_id', auth()->id())->get();
         return view('animals.create', compact('farms'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'animal_number' => 'required|string|max:255',
-            'type_name' => 'required|string|max:255',
+        $validatedData = $request->validate([
+            'animal_number' => 'required',
+            'type_name' => 'required',
             'years' => 'required|integer',
             'farm_id' => 'required|exists:farms,id',
         ]);
 
-        Animal::create($request->all());
+        // Ensure the farm belongs to the authenticated user
+        $farm = Farm::where('id', $request->farm_id)->where('user_id', auth()->id())->firstOrFail();
+
+        Animal::create($validatedData);
+
         return redirect()->route('animals.index');
     }
 
