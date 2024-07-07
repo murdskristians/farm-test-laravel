@@ -3,22 +3,22 @@
 @section('content')
 <div class="container">
     <h1>Edit Farm</h1>
-    <form action="{{ route('farms.update', $farm->id) }}" method="POST">
+    <form method="POST" action="{{ route('farms.update', $farm->id) }}">
         @csrf
         @method('PUT')
-        <div class="form-group">
-            <label for="name">Name</label>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control" id="name" name="name" value="{{ $farm->name }}" required>
         </div>
-        <div class="form-group">
-            <label for="email">Email</label>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" value="{{ $farm->email }}" required>
         </div>
-        <div class="form-group">
-            <label for="website">Website</label>
-            <input type="text" class="form-control" id="website" name="website" value="{{ $farm->website }}">
+        <div class="mb-3">
+            <label for="website" class="form-label">Website</label>
+            <input type="url" class="form-control" id="website" name="website" value="{{ $farm->website }}">
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
     </form>
 </div>
 @endsection

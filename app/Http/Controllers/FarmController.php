@@ -22,9 +22,8 @@ class FarmController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:farms,email',
+            'email' => 'required|email',
             'website' => 'nullable|url',
-            'user_id' => 'required|exists:users,id', // Ensure user_id is validated
         ]);
 
         Farm::create($validatedData);
@@ -46,9 +45,8 @@ class FarmController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:farms,email,' . $farm->id,
+            'email' => 'required|email',
             'website' => 'nullable|url',
-            'user_id' => 'required|exists:users,id', // Ensure user_id is validated
         ]);
 
         $farm->update($validatedData);
