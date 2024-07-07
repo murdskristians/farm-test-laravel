@@ -15,6 +15,10 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    <div class="mt-3">
+                        <a href="{{ route('farms.index') }}" class="btn btn-primary">View Farms</a>
+                        <a href="{{ route('animals.index') }}" class="btn btn-primary">View Animals</a>
+                    </div>
                 </div>
             </div>
         </div>

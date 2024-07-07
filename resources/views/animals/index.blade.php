@@ -3,7 +3,10 @@
 @section('content')
 <div class="container">
     <h1>Animals</h1>
-    <a href="{{ route('animals.create') }}" class="btn btn-primary">Add Animal</a>
+    <div class="mb-3">
+        <a href="{{ route('animals.create') }}" class="btn btn-primary">Add Animal</a>
+        <a href="{{ route('farms.index') }}" class="btn btn-secondary">View Farms</a>
+    </div>
     <table class="table">
         <thead>
             <tr>
