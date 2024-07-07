@@ -3,10 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Animals</h1>
-    <div class="mb-3">
-        <a href="{{ route('animals.create') }}" class="btn btn-primary">Add Animal</a>
-        <a href="{{ route('farms.index') }}" class="btn btn-secondary">View Farms</a>
-    </div>
+    <a href="{{ route('animals.create') }}" class="btn btn-primary">Add Animal</a>
     <table class="table">
         <thead>
             <tr>
@@ -23,7 +20,7 @@
                 <td>{{ $animal->animal_number }}</td>
                 <td>{{ $animal->type_name }}</td>
                 <td>{{ $animal->years }}</td>
-                <td>{{ $animal->farm->name }}</td>
+                <td>{{ optional($animal->farm)->name }}</td>
                 <td>
                     <a href="{{ route('animals.show', $animal->id) }}" class="btn btn-info">View</a>
                     <a href="{{ route('animals.edit', $animal->id) }}" class="btn btn-warning">Edit</a>

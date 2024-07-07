@@ -3,62 +3,67 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Animal;
+use App\Models\Farm;
 
 class AnimalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $animals = Animal::with('farm')->paginate(10);
+        return view('animals.index', compact('animals'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $farms = Farm::all();
+        return view('animals.create', compact('farms'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'animal_number' => 'required|string|max:255',
+            'type_name' => 'required|string|max:255',
+            'years' => 'required|integer',
+            'farm_id' => 'required|exists:farms,id',
+        ]);
+
+        Animal::create($request->all());
+        return redirect()->route('animals.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $animal = Animal::with('farm')->findOrFail($id);
+        return view('animals.show', compact('animal'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $animal = Animal::findOrFail($id);
+        $farms = Farm::all();
+        return view('animals.edit', compact('animal', 'farms'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'animal_number' => 'required|string|max:255',
+            'type_name' => 'required|string|max:255',
+            'years' => 'required|integer',
+            'farm_id' => 'required|exists:farms,id',
+        ]);
+
+        $animal = Animal::findOrFail($id);
+        $animal->update($request->all());
+        return redirect()->route('animals.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $animal = Animal::findOrFail($id);
+        $animal->delete();
+        return redirect()->route('animals.index');
     }
 }

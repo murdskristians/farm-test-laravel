@@ -22,15 +22,15 @@ class FarmController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:farms,email',
             'website' => 'nullable|url',
+            'user_id' => 'required|exists:users,id', // Ensure user_id is validated
         ]);
 
         Farm::create($validatedData);
 
         return redirect()->route('farms.index');
     }
-
 
     public function show(Farm $farm)
     {
@@ -44,12 +44,14 @@ class FarmController extends Controller
 
     public function update(Request $request, Farm $farm)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:farms,email,' . $farm->id,
+            'website' => 'nullable|url',
+            'user_id' => 'required|exists:users,id', // Ensure user_id is validated
         ]);
 
-        $farm->update($request->all());
+        $farm->update($validatedData);
         return redirect()->route('farms.index');
     }
 

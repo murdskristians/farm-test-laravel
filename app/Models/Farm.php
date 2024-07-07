@@ -10,4 +10,9 @@ class Farm extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'email', 'website'];
+
+    public function animals()
+    {
+        return $this->hasMany(Animal::class);
+    }
 }

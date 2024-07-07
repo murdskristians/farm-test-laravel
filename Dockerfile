@@ -16,7 +16,8 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     nodejs \
     npm \
-    iputils-ping
+    iputils-ping \
+    libmysqlclient-dev  # Add this line
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
