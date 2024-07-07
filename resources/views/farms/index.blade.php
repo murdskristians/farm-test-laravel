@@ -23,13 +23,15 @@
                 <td>{{ $farm->email }}</td>
                 <td>{{ $farm->website }}</td>
                 <td>
-                    <a href="{{ route('farms.show', $farm->id) }}" class="btn btn-info">View</a>
-                    <a href="{{ route('farms.edit', $farm->id) }}" class="btn btn-warning">Edit</a>
-                    <form action="{{ route('farms.destroy', $farm->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
+                    @if($farm->user_id == auth()->id())
+                        <a href="{{ route('farms.show', $farm->id) }}" class="btn btn-info">View</a>
+                        <a href="{{ route('farms.edit', $farm->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('farms.destroy', $farm->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    @endif
                 </td>
             </tr>
             @endforeach
