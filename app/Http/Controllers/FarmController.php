@@ -26,10 +26,13 @@ class FarmController extends Controller
             'website' => 'nullable|url',
         ]);
 
+        $validatedData['user_id'] = auth()->id(); // Set the user_id to the authenticated user
+
         Farm::create($validatedData);
 
         return redirect()->route('farms.index');
     }
+
 
     public function show(Farm $farm)
     {

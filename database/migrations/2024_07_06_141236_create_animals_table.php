@@ -17,7 +17,7 @@ class CreateAnimalsTable extends Migration
             $table->id();
             $table->string('animal_number');
             $table->string('type_name');
-            $table->integer('years');
+            $table->integer('years')->nullable();;
             $table->foreignId('farm_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

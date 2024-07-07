@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
     nodejs \
     npm \
     iputils-ping \
-    libmysqlclient-dev  # Add this line
+    libmariadb-dev  # Add this line
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
