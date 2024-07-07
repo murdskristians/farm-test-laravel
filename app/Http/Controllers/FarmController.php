@@ -33,8 +33,11 @@ class FarmController extends Controller
 
     public function show(Farm $farm)
     {
-        return view('farms.show', compact('farm'));
+        $user = $farm->user;
+        $animals = $farm->animals;
+        return view('farms.show', compact('farm', 'user', 'animals'));
     }
+
 
     public function edit(Farm $farm)
     {
